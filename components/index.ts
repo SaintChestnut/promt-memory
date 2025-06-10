@@ -4,4 +4,4 @@ export * from './nav';
 export * from './profile';
 export * from './prompt-card';
 export * from './prompt-card-list';
-export * from './provider';
+export * from './providers';

@@ -1,4 +1,4 @@
-import { Nav, Provider } from '@/components';
+import { Nav, SessionProvider } from '@/components';
 import '@styles/globals.css';
 
 export const metadata = {
@@ -14,7 +14,7 @@ const Layout = ({
   return (
     <html lang="en">
       <body>
-        <Provider>
+        <SessionProvider>
           <div className="main">
             <div className="gradient" />
           </div>
@@ -22,7 +22,7 @@ const Layout = ({
             <Nav />
             {children}
           </main>
-        </Provider>
+        </SessionProvider>
       </body>
     </html>
   );
