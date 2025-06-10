@@ -1,10 +1,11 @@
-export type PageRoutesType = 'HOME' | 'CREATE_PROMPT' | 'EDIT_PROMPT' | 'PROFILE';
+export type PageRoutesType = 'HOME' | 'CREATE_PROMPT' | 'EDIT_PROMPT' | 'PROFILE' | 'NO_USER';
 
 export const pageRoutes: Record<PageRoutesType, string> = {
   HOME: '/',
   CREATE_PROMPT: '/create-prompt',
   EDIT_PROMPT: '/edit-prompt',
-  PROFILE: '/profile'
+  PROFILE: '/profile',
+  NO_USER: '/no-user'
 };
 
 export type ApiRoutesType = 'NEW_PROMPT' | 'PROMPT_BY_ID' | 'USER_POSTS' | 'ALL_PROMPTS';
