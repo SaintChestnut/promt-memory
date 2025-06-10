@@ -1,5 +1,6 @@
 'use client';
 
+import { pageRoutes } from '@/resources';
 import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -15,7 +16,7 @@ export const UserProvider = ({ children, session }: ProviderProps) => {
 
   useEffect(() => {
     if (!userId) {
-      router.push('/no-user');
+      router.push(pageRoutes.NO_USER);
     }
   }, [router, userId]);
 
