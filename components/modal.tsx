@@ -1,5 +1,6 @@
 'use client';
 
+import { messages } from '@/resources';
 import { FC } from 'react';
 import { Portal } from '.';
 
@@ -25,7 +26,7 @@ export const Modal: FC<ModalProps> = ({ show, onCloseButtonClick, children }) =>
         }}>
         <div className="modal">
           <div className="modal-header">
-            <button onClick={onCloseButtonClick}>Close Modal</button>
+            <button onClick={onCloseButtonClick}>{messages.modal.closeButton}</button>
           </div>
           <div className="modal-body">{children}</div>
         </div>

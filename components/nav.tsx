@@ -1,7 +1,7 @@
 'use client';
 
 import { ModalContext } from '@/context';
-import { pageRoutes } from '@/resources';
+import { messages, pageRoutes } from '@/resources';
 import { BuiltInProviderType } from 'next-auth/providers/index';
 import {
   ClientSafeProvider,
@@ -36,7 +36,7 @@ export const Nav = () => {
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href={pageRoutes.HOME} className="flex gap-2 flex-center">
         <Image src="/assets/images/logo.svg" alt="logo" width={40} height={40} className="object-contain" />
-        <p className="logo_text">Prompt Memory</p>
+        <p className="logo_text">{messages.navigationBar.logoText}</p>
       </Link>
       {session?.user ? (
         <>
@@ -44,10 +44,10 @@ export const Nav = () => {
           <div className="sm:flex hidden">
             <div className="flex gap-3 md:gap-5">
               <Link href={pageRoutes.CREATE_PROMPT} className="black_btn">
-                Create Post
+                {messages.navigationBar.buttons.createPromt}
               </Link>
               <button type="button" onClick={() => signOut()} className="outline_btn">
-                Sign Out
+                {messages.navigationBar.buttons.signOut}
               </button>
               <Link href={pageRoutes.PROFILE}>
                 <Image
@@ -74,13 +74,13 @@ export const Nav = () => {
               {toggleDropdown && (
                 <div className="dropdown">
                   <Link href={pageRoutes.PROFILE} className="dropdown_link" onClick={() => setToggleDropdown(false)}>
-                    My Profile
+                    {messages.navigationBar.buttons.myProfile}
                   </Link>
                   <Link
                     href={pageRoutes.CREATE_PROMPT}
                     className="dropdown_link"
                     onClick={() => setToggleDropdown(false)}>
-                    Create Prompt
+                    {messages.navigationBar.buttons.createPromt}
                   </Link>
                   <button
                     type="button"
@@ -89,7 +89,7 @@ export const Nav = () => {
                       setToggleDropdown(false);
                       signOut();
                     }}>
-                    Sign Out
+                    {messages.navigationBar.buttons.signOut}
                   </button>
                 </div>
               )}
@@ -99,7 +99,7 @@ export const Nav = () => {
       ) : (
         <>
           <button type="button" onClick={() => toggleModal && toggleModal()} className="outline_btn">
-            Sign In
+            {messages.signIn}
           </button>
           <Modal show={isOpen} onCloseButtonClick={onCloseModal}>
             <Authentication providers={authProviders} />

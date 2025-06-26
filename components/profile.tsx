@@ -1,4 +1,5 @@
 import { PromptPostType } from '@/models';
+import { messages } from '@/resources';
 import { FC } from 'react';
 import { PromptCard } from '.';
 
@@ -14,7 +15,9 @@ export const Profile: FC<ProfileProps> = ({ name, description, posts, editHandle
   return (
     <section className="w-full">
       <h1 className="head_text text-left">
-        <span className="blue_gradient">{name} Profile</span>
+        <span className="blue_gradient">
+          {name} {messages.profile.header}
+        </span>
       </h1>
       <p className="desc text-left">{description}</p>
       <div className="mt-10 prompt_layout">

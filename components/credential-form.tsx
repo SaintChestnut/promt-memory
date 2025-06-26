@@ -1,5 +1,6 @@
 'use client';
 import { AuthenticationFormCategoryEnum, AuthenticationFormCategoryType, CredentialsDataType } from '@/models';
+import { messages } from '@/resources';
 import { FC, useState } from 'react';
 
 type PropsType = {
@@ -20,7 +21,7 @@ export const CredentialForm: FC<PropsType> = ({ category, onSubmitClick }) => {
         }}
         className="m-2 w-auto max-w-2xl flex flex-col gap-7 glassmorphism">
         <label>
-          <span className="font-satoshi font-semibold taxt-base text-gray-700">Email</span>
+          <span className="font-satoshi font-semibold taxt-base text-gray-700">{messages.credentialsForm.email}</span>
           <input
             value={credentials.email}
             onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
@@ -29,7 +30,9 @@ export const CredentialForm: FC<PropsType> = ({ category, onSubmitClick }) => {
           />
         </label>
         <label>
-          <span className="font-satoshi font-semibold taxt-base text-gray-700">Password</span>
+          <span className="font-satoshi font-semibold taxt-base text-gray-700">
+            {messages.credentialsForm.password}
+          </span>
           <input
             type="password"
             value={credentials.password}
@@ -43,7 +46,7 @@ export const CredentialForm: FC<PropsType> = ({ category, onSubmitClick }) => {
             type="submit"
             // disabled={submitting}
             className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white">
-            {category === AuthenticationFormCategoryEnum.SIGN_IN ? 'Sign In' : 'Sign Up'}
+            {category === AuthenticationFormCategoryEnum.SIGN_IN ? messages.signIn : messages.signUp}
           </button>
         </div>
       </form>

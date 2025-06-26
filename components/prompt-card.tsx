@@ -1,7 +1,7 @@
 'use client';
 
 import { PromptPostType } from '@/models';
-import { pageRoutes, searchParams } from '@/resources';
+import { messages, pageRoutes, searchParams } from '@/resources';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FC, useState } from 'react';
@@ -59,12 +59,12 @@ export const PromptCard: FC<PromptCardProps> = ({ post, onTagClick, onEditClick,
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           {onEditClick && (
             <p className="font-inter text-sm green_gradient cursor-pointer" onClick={() => onEditClick(post)}>
-              Edit
+              {messages.promtCard.buttons.edit}
             </p>
           )}
           {onDeleteClick && (
             <p className="font-inter text-sm orange_gradient cursor-pointer" onClick={() => onDeleteClick(post)}>
-              Delete
+              {messages.promtCard.buttons.delete}
             </p>
           )}
         </div>

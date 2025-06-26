@@ -2,6 +2,7 @@
 
 import { register } from '@/app/api/register/route';
 import { AuthenticationFormCategoryEnum, CredentialsDataType } from '@/models';
+import { messages } from '@/resources';
 import { BuiltInProviderType } from 'next-auth/providers/index';
 import { ClientSafeProvider, LiteralUnion } from 'next-auth/react';
 import { FC, useState } from 'react';
@@ -37,7 +38,7 @@ export const Authentication: FC<AuthenticationProps> = ({ providers }) => {
         <CredentialForm category={AuthenticationFormCategoryEnum.SIGN_UP} onSubmitClick={handleSignUp} />
       )}
       <button type="button" onClick={() => setSignInMode((prev) => !prev)} className="black_btn">
-        {signInMode ? 'Sign Up' : 'Sign In'}
+        {signInMode ? messages.createAccount : messages.signIn}
       </button>
     </div>
   );
