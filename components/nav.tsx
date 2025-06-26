@@ -1,24 +1,34 @@
 'use client';
 
+import { ModalContext } from '@/context';
 import { pageRoutes } from '@/resources';
 import { BuiltInProviderType } from 'next-auth/providers/index';
-import { ClientSafeProvider, getProviders, LiteralUnion, signIn, signOut, useSession } from 'next-auth/react';
+import {
+  ClientSafeProvider,
+  getProviders as getAuthProviders,
+  LiteralUnion,
+  signOut,
+  useSession
+} from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Authentication, Modal } from '.';
 
 export const Nav = () => {
   const { data: session } = useSession();
-  const [providers, setProviders] = useState<Record<
+  const [authProviders, setAuthProviders] = useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
   > | null>(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
+  const { toggle: toggleModal, onClose: onCloseModal, isOpen } = useContext(ModalContext);
+
   useEffect(() => {
     (async () => {
-      const res = await getProviders();
-      setProviders(res);
+      const res = await getAuthProviders();
+      setAuthProviders(res);
     })();
   }, []);
 
@@ -88,12 +98,12 @@ export const Nav = () => {
         </>
       ) : (
         <>
-          {providers &&
-            Object.values(providers).map((provider) => (
-              <button key={provider.name} type="button" onClick={() => signIn(provider.id)} className="black_btn">
-                Sign In
-              </button>
-            ))}
+          <button type="button" onClick={() => toggleModal && toggleModal()} className="outline_btn">
+            Sign In
+          </button>
+          <Modal show={isOpen} onCloseButtonClick={onCloseModal}>
+            <Authentication providers={authProviders} />
+          </Modal>
         </>
       )}
     </nav>

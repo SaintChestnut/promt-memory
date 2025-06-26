@@ -4,13 +4,19 @@ interface IUserSchema extends Document {
   email: string;
   username: string;
   image: string;
+  password: string;
+  createdAt: Date;
+  updatedAt: Date;
+  // isVerified: boolean;
+  // verifyToken: string;
+  authProvider: string;
 }
 
 const UserSchema: Schema<IUserSchema> = new Schema({
   email: {
     type: String,
     required: [true, 'Email is required'],
-    unique: [true, 'Email already exists']
+    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Email is invalid']
   },
   username: {
     type: String,
@@ -22,9 +28,33 @@ const UserSchema: Schema<IUserSchema> = new Schema({
   },
   image: {
     type: String
+  },
+  password: {
+    type: String
+  },
+  // isVerified: {
+  //   type: Boolean,
+  //   default: false
+  // },
+  // verifyToken: {
+  //   type: String,
+  //   default: ''
+  // },
+  authProvider: {
+    type: String,
+    enum: ['google', 'credentials'],
+    default: 'credentials'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
   }
 });
 
-const User = models.User || model('User', UserSchema);
+const User = models?.User || model<IUserSchema>('User', UserSchema);
 
 export default User;

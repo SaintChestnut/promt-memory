@@ -1,7 +1,9 @@
 'use client';
 
+import { pageRoutes } from '@/resources';
 import { BuiltInProviderType } from 'next-auth/providers/index';
 import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const NoUser = () => {
@@ -9,6 +11,12 @@ const NoUser = () => {
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
   > | null>(null);
+
+  const router = useRouter();
+
+  const signInHandler = async (providerId: string) => {
+    await signIn(providerId, { callbackUrl: pageRoutes.PROFILE });
+  };
 
   useEffect(() => {
     (async () => {
@@ -23,7 +31,7 @@ const NoUser = () => {
       <br className="max-md:hidden" />
       {providers &&
         Object.values(providers).map((provider) => (
-          <button key={provider.name} type="button" onClick={() => signIn(provider.id)} className="black_btn">
+          <button key={provider.name} type="button" onClick={() => signInHandler(provider.id)} className="black_btn">
             Sign In
           </button>
         ))}

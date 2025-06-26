@@ -1,4 +1,4 @@
-import { Nav, SessionProvider } from '@/components';
+import { ModalProvider, Nav, SessionProvider } from '@/components';
 import '@styles/globals.css';
 
 export const metadata = {
@@ -15,13 +15,15 @@ const Layout = ({
     <html lang="en">
       <body>
         <SessionProvider>
-          <div className="main">
-            <div className="gradient" />
-          </div>
-          <main className="app">
-            <Nav />
-            {children}
-          </main>
+          <ModalProvider>
+            <div className="main">
+              <div className="gradient" />
+            </div>
+            <main className="app">
+              <Nav />
+              {children}
+            </main>
+          </ModalProvider>
         </SessionProvider>
       </body>
     </html>
