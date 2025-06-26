@@ -1,4 +1,5 @@
 export * from './authentication';
+export * from './authentication-modal';
 export * from './feed';
 export * from './form';
 export * from './modal';
