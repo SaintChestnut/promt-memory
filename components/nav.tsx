@@ -1,36 +1,16 @@
 'use client';
 
-import { ModalContext } from '@/context';
 import { messages, pageRoutes } from '@/resources';
-import { BuiltInProviderType } from 'next-auth/providers/index';
-import {
-  ClientSafeProvider,
-  getProviders as getAuthProviders,
-  LiteralUnion,
-  signOut,
-  useSession
-} from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useContext, useEffect, useState } from 'react';
-import { Authentication, Modal } from '.';
+import { useState } from 'react';
+import { AuthenticationModal } from './authentication-modal';
 
 export const Nav = () => {
   const { data: session } = useSession();
-  const [authProviders, setAuthProviders] = useState<Record<
-    LiteralUnion<BuiltInProviderType, string>,
-    ClientSafeProvider
-  > | null>(null);
+
   const [toggleDropdown, setToggleDropdown] = useState(false);
-
-  const { toggle: toggleModal, onClose: onCloseModal, isOpen } = useContext(ModalContext);
-
-  useEffect(() => {
-    (async () => {
-      const res = await getAuthProviders();
-      setAuthProviders(res);
-    })();
-  }, []);
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -97,14 +77,7 @@ export const Nav = () => {
           </div>
         </>
       ) : (
-        <>
-          <button type="button" onClick={() => toggleModal && toggleModal()} className="outline_btn">
-            {messages.signIn}
-          </button>
-          <Modal show={isOpen} onCloseButtonClick={onCloseModal}>
-            <Authentication providers={authProviders} />
-          </Modal>
-        </>
+        <AuthenticationModal />
       )}
     </nav>
   );
