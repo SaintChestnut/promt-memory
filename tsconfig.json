@@ -24,7 +24,8 @@
       "@components/*": ["./components/*"],
       "@ui/*": ["./components/ui/*"],
       "@lib/*": ["./lib/*"],
-      "@styles/*": ["./styles/*"]
+      "@styles/*": ["./styles/*"],
+      "@context/*": ["./context/*"]
     }
   },
   "include": [
