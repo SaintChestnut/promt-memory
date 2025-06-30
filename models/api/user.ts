@@ -8,7 +8,7 @@ interface IUserSchema extends Document {
   createdAt: Date;
   updatedAt: Date;
   // isVerified: boolean;
-  // verifyToken: string;
+  verifyToken: string;
   authProvider: string;
 }
 
@@ -36,10 +36,10 @@ const UserSchema: Schema<IUserSchema> = new Schema({
   //   type: Boolean,
   //   default: false
   // },
-  // verifyToken: {
-  //   type: String,
-  //   default: ''
-  // },
+  verifyToken: {
+    type: String,
+    default: ''
+  },
   authProvider: {
     type: String,
     enum: ['google', 'credentials'],
