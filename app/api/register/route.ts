@@ -23,7 +23,8 @@ export const register = async (values: RegisterProps) => {
     const user = new User({
       email,
       password: hashedPassword,
-      username: username ?? email.split('@')[0] + '_username'
+      username: username ?? email.split('@')[0] + '_username',
+      verifyToken: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000
     });
     await user.save();
   } catch (e) {
