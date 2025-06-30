@@ -34,6 +34,14 @@ const handler = NextAuth({
           throw new Error('Invalid password.');
         }
 
+        // @todo: update condition for verificated check
+        if (user) {
+          await User.updateOne(
+            { email: credentials?.email },
+            { verifyToken: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000 }
+          );
+        }
+
         // if (!user.isVerified) {
         //   throw new Error('Email not verified.');
         // }
@@ -63,14 +71,23 @@ const handler = NextAuth({
               email: profile?.email,
               username: profile?.name?.replace(' ', '').toLowerCase(),
               image: profile?.image,
-              authProvider: 'google'
+              authProvider: 'google',
+              verifyToken: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000
             });
           }
         }
 
+        // @todo: update condition for verificated check
+        if (userExists) {
+          await User.updateOne(
+            { email: profile?.email },
+            { verifyToken: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000 }
+          );
+        }
+
         return true;
       } catch (error) {
-        console.error('Error connecting to the database:', error);
+        console.error('Sign in error:', error);
         return false;
       }
     }
