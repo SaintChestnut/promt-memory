@@ -1,5 +1,6 @@
 'use client';
 
+import { sendToken } from '@/app/api/user-verification/route';
 import { messages, pageRoutes } from '@/resources';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -20,6 +21,12 @@ export const Nav = () => {
       </Link>
       {session?.user ? (
         <>
+          <button
+            type="button"
+            onClick={async () => sendToken({ email: session?.user?.email || '' })}
+            className="black_btn">
+            Send token
+          </button>
           {/* web */}
           <div className="sm:flex hidden">
             <div className="flex gap-3 md:gap-5">
